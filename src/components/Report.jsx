@@ -31,8 +31,8 @@ function Report({ answers, priorities, setPriorityLevel, getPriorityLevel, showA
     )
   }
 
-  const NarrativeSection = ({ id, title, children, actionItems = [] }) => {
-    const item = { id, title, content: children, actionItems }
+  const NarrativeSection = ({ id, title, children, actionItems = [], resources = null }) => {
+    const item = { id, title, content: children, actionItems, resources }
 
     return (
       <div className="narrative-section">
@@ -113,6 +113,17 @@ function Report({ answers, priorities, setPriorityLevel, getPriorityLevel, showA
                 'Negotiate rates - your experience commands premium compensation',
                 'Review malpractice coverage options (occurrence vs. claims-made)'
               ]}
+              resources={{
+                guide: "Getting started with locum tenens: (1) Register with 2-3 reputable agencies - they handle credentialing, licensing support, travel, and housing. (2) Be clear about your preferences - location, schedule, practice setting. (3) Negotiate rates - experienced physicians command $150-300+/hr depending on specialty; don't accept the first offer. (4) Understand malpractice coverage - most agencies provide occurrence-based coverage (preferable) or claims-made with tail. (5) Start with shorter assignments to find your comfort level.",
+                links: [
+                  { name: 'CompHealth', url: 'https://comphealth.com/physicians/', description: 'One of the largest locum agencies, all specialties' },
+                  { name: 'Weatherby Healthcare', url: 'https://weatherbyhealthcare.com/', description: 'Premium locum tenens placements' },
+                  { name: 'Staff Care', url: 'https://www.staffcare.com/physicians/', description: 'AMN Healthcare company, nationwide opportunities' },
+                  { name: 'LocumTenens.com', url: 'https://www.locumtenens.com/', description: 'Large job board and agency network' },
+                  { name: 'Vista Staffing', url: 'https://www.vistastaff.com/', description: 'Physician staffing with permanent and locum options' },
+                  { name: 'NALTO (Assn)', url: 'https://www.nalto.org/', description: 'National Association of Locum Tenens Organizations' }
+                ]
+              }}
             >
               <p>
                 Locum tenens and part-time clinical positions offer the best of both worlds: continued patient care with built-in flexibility. You can work when you want, where you want, and maintain clinical skills without the administrative burden of running a practice. Many retiring physicians find this arrangement ideal - it keeps them connected to medicine while allowing extended time off for travel, family, or other pursuits. Compensation is typically excellent, and you can scale up or down based on your preferences.
@@ -131,6 +142,23 @@ function Report({ answers, priorities, setPriorityLevel, getPriorityLevel, showA
                 'Set up a professional home office environment',
                 'Consider platforms with strong physician onboarding support'
               ]}
+              resources={{
+                guide: "Getting started with telehealth typically involves: (1) Choose platforms aligned with your specialty - general platforms like Teladoc work for primary care, while specialists should look for niche platforms. (2) Verify licensing - most platforms require licenses in states where patients are located; consider Interstate Medical Licensure Compact (IMLC) for faster multi-state licensing. (3) Set up your space - good lighting, professional background, reliable internet, and HIPAA-compliant software. (4) Start part-time to learn the workflow before committing to more hours.",
+                links: [
+                  { name: 'Teladoc Physician Careers', url: 'https://www.teladochealth.com/physicians/', description: 'Largest telehealth platform - general practice opportunities' },
+                  { name: 'MDLive Physician Network', url: 'https://www.mdlive.com/for-providers/', description: 'Major platform with flexible scheduling' },
+                  { name: 'Amwell Clinician Network', url: 'https://business.amwell.com/providers/', description: 'Enterprise telehealth with hospital partnerships' },
+                  { name: 'Wheel (specialty matching)', url: 'https://www.wheel.com/clinicians', description: 'Connects physicians with companies needing telehealth services' },
+                  { name: 'IMLC - Interstate Compact', url: 'https://www.imlcc.org/', description: 'Expedited licensing for 40+ participating states' }
+                ],
+                specialtyLinks: [
+                  { name: 'Hims & Hers (Urology/Derm)', url: 'https://www.forhims.com/providers', description: 'Urology, dermatology, and mens health focus' },
+                  { name: 'Lemonaid Health', url: 'https://www.lemonaidhealth.com/careers', description: 'Primary care and urgent care telehealth' },
+                  { name: 'Cerebral (Psychiatry)', url: 'https://cerebral.com/prescribers', description: 'Mental health focused telehealth' },
+                  { name: 'Talkiatry (Psychiatry)', url: 'https://www.talkiatry.com/join-us', description: 'Psychiatry-specific telehealth platform' },
+                  { name: 'SteadyMD (various)', url: 'https://www.steadymd.com/physicians/', description: 'B2B telehealth staffing for multiple specialties' }
+                ]
+              }}
             >
               <p>
                 Telehealth is an excellent fit for your transition. You can see patients from anywhere, set your own hours, and maintain clinical skills without the overhead of a physical practice. The pandemic dramatically expanded telehealth acceptance, and patients now expect virtual care options. Your years of clinical experience translate directly - the medicine is the same, just delivered differently. Many platforms offer comprehensive onboarding and technical support for physicians.
@@ -149,6 +177,16 @@ function Report({ answers, priorities, setPriorityLevel, getPriorityLevel, showA
                 'Prepare a CV highlighting specific expertise areas',
                 'Set your hourly rate (experienced experts command $500-1000+/hour)'
               ]}
+              resources={{
+                guide: "Getting started as an expert witness: (1) Take a training course - SEAK offers the gold-standard courses that teach you deposition skills, report writing, and courtroom testimony. (2) Register with referral services - most work comes through attorney networks and expert matching services. (3) Set your rates - review time typically $300-500/hr, deposition/testimony $500-1000+/hr. (4) Prepare your CV emphasizing specific clinical expertise. (5) Get your malpractice carrier to confirm coverage for expert work (most policies cover it).",
+                links: [
+                  { name: 'SEAK Expert Witness Training', url: 'https://www.seak.com/', description: 'Premier expert witness training courses and resources' },
+                  { name: 'ExpertWitness.com', url: 'https://www.expertwitness.com/', description: 'Expert witness directory and referral service' },
+                  { name: 'Expert Institute', url: 'https://www.expertinstitute.com/for-experts/', description: 'Expert matching service connecting with attorneys' },
+                  { name: 'JurisPro Expert Witness', url: 'https://www.jurispro.com/', description: 'Expert witness directory and case matching' },
+                  { name: 'TASA Expert Referrals', url: 'https://www.tasanet.com/', description: 'Technical Advisory Service for Attorneys' }
+                ]
+              }}
             >
               <p>
                 Expert witness work leverages your decades of clinical experience in a completely different arena. Attorneys and courts need physicians who can explain complex medical issues clearly and credibly. The work involves reviewing medical records, writing opinions, giving depositions, and occasionally testifying at trial. Compensation is excellent - experienced experts typically charge $500-1000+ per hour. The work is intellectually stimulating and can be done entirely on your own schedule. Many physicians find it deeply satisfying to help the legal system understand medical nuance.
@@ -167,6 +205,16 @@ function Report({ answers, priorities, setPriorityLevel, getPriorityLevel, showA
                 'Consider Key Opinion Leader (KOL) development programs',
                 'Review conflict-of-interest policies if maintaining academic ties'
               ]}
+              resources={{
+                guide: "Getting started with pharma consulting: (1) Register with expert networks - they connect you with companies seeking physician input and handle all logistics. (2) Update your LinkedIn profile with therapeutic areas and keywords companies search for. (3) Build relationships with MSLs at conferences - they often source advisory board members. (4) Typical engagements: 1-hour phone consultations ($300-500), half-day advisory boards ($2,000-3,000), full-day meetings ($4,000-6,000+). (5) Be aware of conflict-of-interest requirements if you maintain academic or hospital affiliations.",
+                links: [
+                  { name: 'GLG (Gerson Lehrman)', url: 'https://glg.it/council-members/', description: 'Premier expert network connecting physicians with companies' },
+                  { name: 'Guidepoint', url: 'https://www.guidepoint.com/become-an-advisor/', description: 'Expert network for consulting engagements' },
+                  { name: 'AlphaSights', url: 'https://www.alphasights.com/become-an-advisor/', description: 'Global expert network for business insights' },
+                  { name: 'Theseus Medical', url: 'https://www.theseusmedical.com/', description: 'Physician consulting for medical device and pharma' },
+                  { name: 'M3 Global Research', url: 'https://www.m3globalresearch.com/', description: 'Healthcare market research and consulting' }
+                ]
+              }}
             >
               <p>
                 Pharmaceutical and biotech companies actively seek experienced clinicians for advisory boards, speaker programs, and consulting engagements. Your real-world clinical experience is invaluable - you understand how drugs work in actual practice, not just clinical trials. This work typically involves quarterly advisory board meetings, reviewing clinical data, and providing input on drug development and marketing. Compensation is substantial, often $2,000-5,000+ per day for advisory boards, with relatively limited time commitment.

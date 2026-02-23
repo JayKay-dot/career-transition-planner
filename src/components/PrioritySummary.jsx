@@ -1,8 +1,18 @@
+import { useState } from 'react'
+
 function PrioritySummary({ priorities, removePriority, answers }) {
   const { workBasics, healthLifestyle } = answers
+  const [expandedResources, setExpandedResources] = useState({})
 
   const handlePrint = () => {
     window.print()
+  }
+
+  const toggleResources = (id) => {
+    setExpandedResources(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }))
   }
 
   const getHoursDescription = () => {
@@ -35,6 +45,65 @@ function PrioritySummary({ priorities, removePriority, answers }) {
     )
   }
 
+  const ResourcesSection = ({ resources, id }) => {
+    if (!resources) return null
+    const isExpanded = expandedResources[id]
+
+    return (
+      <div className="resources-wrapper">
+        <button
+          className={`learn-more-btn ${isExpanded ? 'expanded' : ''}`}
+          onClick={() => toggleResources(id)}
+        >
+          {isExpanded ? '− Hide Resources' : '+ Learn More & Resources'}
+        </button>
+
+        {isExpanded && (
+          <div className="resources-content">
+            {resources.guide && (
+              <div className="resources-guide">
+                <strong>Getting Started:</strong>
+                <p>{resources.guide}</p>
+              </div>
+            )}
+
+            {resources.links && resources.links.length > 0 && (
+              <div className="resources-links">
+                <strong>Key Resources:</strong>
+                <ul>
+                  {resources.links.map((link, idx) => (
+                    <li key={idx}>
+                      <a href={link.url} target="_blank" rel="noopener noreferrer">
+                        {link.name}
+                      </a>
+                      {link.description && <span className="link-desc"> - {link.description}</span>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {resources.specialtyLinks && resources.specialtyLinks.length > 0 && (
+              <div className="resources-links specialty-links">
+                <strong>Specialty-Specific Platforms:</strong>
+                <ul>
+                  {resources.specialtyLinks.map((link, idx) => (
+                    <li key={idx}>
+                      <a href={link.url} target="_blank" rel="noopener noreferrer">
+                        {link.name}
+                      </a>
+                      {link.description && <span className="link-desc"> - {link.description}</span>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    )
+  }
+
   const PrioritySection = ({ title, items, level }) => {
     if (items.length === 0) return null
 
@@ -59,6 +128,7 @@ function PrioritySummary({ priorities, removePriority, answers }) {
                     </ul>
                   </div>
                 )}
+                <ResourcesSection resources={priority.resources} id={priority.id} />
               </div>
               <button
                 className="remove-priority"
