@@ -2,13 +2,19 @@ function PurposePassions({ answers, updateAnswers, toggleArrayValue }) {
   const volunteeringOptions = [
     'Free clinics / medical missions',
     'Medical education in underserved areas',
-    'Disaster relief / emergency response',
     'Mentoring medical students/residents',
-    'Health advocacy / policy work',
-    'Nonprofit board service',
-    'Community health education',
     'Hospice / palliative care volunteering',
-    'International medical volunteering'
+    'Nonprofit board service',
+    'Youth mentoring / Big Brothers Big Sisters',
+    'Habitat for Humanity / building projects',
+    'Food bank / hunger relief',
+    'Environmental conservation',
+    'Animal rescue / shelter work',
+    'Literacy programs / tutoring',
+    'Veterans organizations',
+    'Faith-based service',
+    'Arts / cultural organizations',
+    'Disaster relief / emergency response'
   ]
 
   const hobbies = [

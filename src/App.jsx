@@ -27,8 +27,7 @@ function App() {
     healthLifestyle: {
       fitnessGoals: [],
       activities: [],
-      energyPreference: '',
-      techComfort: ''
+      energyPreference: ''
     },
     purposePassions: {
       volunteering: [],

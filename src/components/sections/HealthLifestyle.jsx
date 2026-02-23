@@ -86,29 +86,6 @@ function HealthLifestyle({ answers, updateAnswers, toggleArrayValue }) {
         </div>
       </div>
 
-      <div className="question-group">
-        <label className="question-label">How comfortable are you with technology?</label>
-        <div className="radio-group">
-          {[
-            'Very comfortable - early adopter',
-            'Comfortable - I learn new tech easily',
-            'Moderate - I can learn with some effort',
-            'Low comfort - prefer minimal technology',
-            'I prefer to avoid technology when possible'
-          ].map(option => (
-            <label key={option} className="radio-option">
-              <input
-                type="radio"
-                name="techComfort"
-                value={option}
-                checked={answers.techComfort === option}
-                onChange={(e) => updateAnswers('techComfort', e.target.value)}
-              />
-              <span>{option}</span>
-            </label>
-          ))}
-        </div>
-      </div>
     </div>
   )
 }

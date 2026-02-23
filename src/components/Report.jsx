@@ -80,7 +80,7 @@ function Report({ answers, priorities, setPriorityLevel, getPriorityLevel }) {
   // Check what content we have to show
   const hasWorkContent = workBasics.hoursPerWeek || workBasics.motivation?.length > 0
   const hasIndustryContent = Object.values(industryInterests).some(v => v)
-  const hasHealthContent = healthLifestyle.fitnessGoals?.length > 0 || healthLifestyle.activities?.length > 0 || healthLifestyle.techComfort
+  const hasHealthContent = healthLifestyle.fitnessGoals?.length > 0 || healthLifestyle.activities?.length > 0
   const hasPurposeContent = purposePassions.volunteering?.length > 0 || purposePassions.hobbies?.length > 0 || purposePassions.somedayDreams
   const hasSocialContent = socialSpiritual.familyTime || socialSpiritual.travelPlans?.length > 0 || socialSpiritual.spiritualConnection
 
@@ -171,18 +171,16 @@ function Report({ answers, priorities, setPriorityLevel, getPriorityLevel }) {
             <NarrativeSection
               id="telehealth"
               title="Telehealth Practice"
-              actionItems={
-                healthLifestyle.techComfort?.includes('Low comfort')
-                  ? ['Research platforms with robust physician onboarding and support', 'Start with asynchronous telehealth (less technically demanding)', 'Ask about dedicated IT support during consultations', 'Consider a tech-savvy family member as initial support']
-                  : ['Explore major platforms (Teladoc, MDLive, Amwell)', 'Look into specialty-specific telehealth opportunities', 'Review multi-state licensing requirements', 'Set up a professional home office environment']
-              }
+              actionItems={[
+                'Explore major platforms (Teladoc, MDLive, Amwell)',
+                'Look into specialty-specific telehealth opportunities',
+                'Review multi-state licensing requirements',
+                'Set up a professional home office environment',
+                'Consider platforms with strong physician onboarding support'
+              ]}
             >
               <p>
-                {healthLifestyle.techComfort?.includes('Low comfort') ? (
-                  <>You've expressed interest in telehealth while noting some hesitation around technology. This is common and very manageable. Many telehealth platforms now offer comprehensive onboarding specifically for physicians, with dedicated support staff available during consultations. Consider starting with "store-and-forward" asynchronous telehealth, where you review patient information and respond at your own pace - this is less technically demanding than live video visits.</>
-                ) : (
-                  <>Telehealth is an excellent fit for your transition. You can see patients from anywhere, set your own hours, and maintain clinical skills without the overhead of a physical practice. The pandemic dramatically expanded telehealth acceptance, and patients now expect virtual care options. Your years of clinical experience translate directly - the medicine is the same, just delivered differently.</>
-                )}
+                Telehealth is an excellent fit for your transition. You can see patients from anywhere, set your own hours, and maintain clinical skills without the overhead of a physical practice. The pandemic dramatically expanded telehealth acceptance, and patients now expect virtual care options. Your years of clinical experience translate directly - the medicine is the same, just delivered differently. Many platforms offer comprehensive onboarding and technical support for physicians.
               </p>
             </NarrativeSection>
           )}
