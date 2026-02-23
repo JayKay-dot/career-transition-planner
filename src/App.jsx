@@ -41,7 +41,6 @@ function App() {
       travelPlans: []
     }
   })
-  const [showFinalReport, setShowFinalReport] = useState(false)
   const [priorities, setPriorities] = useState([])
 
   const updateAnswers = (section, field, value) => {
@@ -95,10 +94,12 @@ function App() {
     'Health & Lifestyle',
     'Purpose & Passions',
     'Family & Social',
-    'Prioritize'
+    'Prioritize',
+    'Your Report'
   ]
 
   const isPrioritizeSection = currentSection === 5
+  const isReportSection = currentSection === 6
 
   return (
     <div className="app">
@@ -107,86 +108,85 @@ function App() {
         <p className="subtitle">Your personalized guide to a fulfilling next chapter</p>
       </header>
 
-      {!showFinalReport ? (
-        <>
-          <nav className="section-nav">
-            {sections.map((section, index) => (
-              <button
-                key={index}
-                className={`nav-btn ${currentSection === index ? 'active' : ''} ${index < currentSection ? 'completed' : ''}`}
-                onClick={() => setCurrentSection(index)}
-              >
-                <span className="nav-number">{index + 1}</span>
-                <span className="nav-label">{section}</span>
-              </button>
-            ))}
-          </nav>
-
-          {isPrioritizeSection ? (
-            <>
-              <Report
-                answers={answers}
-                priorities={priorities}
-                setPriorityLevel={setPriorityLevel}
-                getPriorityLevel={getPriorityLevel}
-                showActionItems={false}
-              />
-              <div className="survey-navigation">
-                <button
-                  className="nav-button prev"
-                  onClick={() => setCurrentSection(4)}
-                >
-                  Previous
-                </button>
-                <button
-                  className="nav-button generate"
-                  onClick={() => setShowFinalReport(true)}
-                  disabled={priorities.length === 0}
-                >
-                  View My Action Plan
-                </button>
-              </div>
-            </>
-          ) : (
-            <>
-              <Survey
-                currentSection={currentSection}
-                answers={answers}
-                updateAnswers={updateAnswers}
-                toggleArrayValue={toggleArrayValue}
-              />
-              <div className="survey-navigation">
-                {currentSection > 0 && (
-                  <button
-                    className="nav-button prev"
-                    onClick={() => setCurrentSection(prev => prev - 1)}
-                  >
-                    Previous
-                  </button>
-                )}
-                <button
-                  className="nav-button next"
-                  onClick={() => setCurrentSection(prev => prev + 1)}
-                >
-                  Next
-                </button>
-              </div>
-            </>
-          )}
-        </>
-      ) : (
-        <>
+      <nav className="section-nav">
+        {sections.map((section, index) => (
           <button
-            className="back-button"
-            onClick={() => setShowFinalReport(false)}
+            key={index}
+            className={`nav-btn ${currentSection === index ? 'active' : ''} ${index < currentSection ? 'completed' : ''}`}
+            onClick={() => setCurrentSection(index)}
+            disabled={index === 6 && priorities.length === 0}
           >
-            Back to Prioritize
+            <span className="nav-number">{index + 1}</span>
+            <span className="nav-label">{section}</span>
           </button>
+        ))}
+      </nav>
+
+      {isReportSection ? (
+        <>
           <PrioritySummary
             priorities={priorities}
             removePriority={removePriority}
             answers={answers}
           />
+          <div className="survey-navigation">
+            <button
+              className="nav-button prev"
+              onClick={() => setCurrentSection(5)}
+            >
+              Back to Prioritize
+            </button>
+          </div>
+        </>
+      ) : isPrioritizeSection ? (
+        <>
+          <Report
+            answers={answers}
+            priorities={priorities}
+            setPriorityLevel={setPriorityLevel}
+            getPriorityLevel={getPriorityLevel}
+            showActionItems={false}
+          />
+          <div className="survey-navigation">
+            <button
+              className="nav-button prev"
+              onClick={() => setCurrentSection(4)}
+            >
+              Previous
+            </button>
+            <button
+              className="nav-button generate"
+              onClick={() => setCurrentSection(6)}
+              disabled={priorities.length === 0}
+            >
+              Generate Report
+            </button>
+          </div>
+        </>
+      ) : (
+        <>
+          <Survey
+            currentSection={currentSection}
+            answers={answers}
+            updateAnswers={updateAnswers}
+            toggleArrayValue={toggleArrayValue}
+          />
+          <div className="survey-navigation">
+            {currentSection > 0 && (
+              <button
+                className="nav-button prev"
+                onClick={() => setCurrentSection(prev => prev - 1)}
+              >
+                Previous
+              </button>
+            )}
+            <button
+              className="nav-button next"
+              onClick={() => setCurrentSection(prev => prev + 1)}
+            >
+              Next
+            </button>
+          </div>
         </>
       )}
     </div>

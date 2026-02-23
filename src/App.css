@@ -81,6 +81,11 @@ body {
   color: white;
 }
 
+.nav-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .nav-number {
   width: 24px;
   height: 24px;
