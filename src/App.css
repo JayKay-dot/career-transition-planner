@@ -305,6 +305,11 @@ body {
   background: #38a169;
 }
 
+.nav-button.generate:disabled {
+  background: #a0aec0;
+  cursor: not-allowed;
+}
+
 /* Back Button */
 .back-button {
   padding: 0.75rem 1.5rem;

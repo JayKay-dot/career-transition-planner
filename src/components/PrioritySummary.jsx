@@ -34,6 +34,7 @@ function PrioritySummary({ priorities, removePriority }) {
                 <h5>{priority.title}</h5>
                 {priority.actionItems && priority.actionItems.length > 0 && (
                   <div className="priority-actions">
+                    <strong>Next Steps:</strong>
                     <ul>
                       {priority.actionItems.map((item, idx) => (
                         <li key={idx}>{item}</li>
@@ -59,7 +60,7 @@ function PrioritySummary({ priorities, removePriority }) {
   return (
     <div className="priority-summary" id="priority-summary">
       <div className="summary-header">
-        <h3>Your Focused Action Plan</h3>
+        <h3>Your Career Transition Action Plan</h3>
         <div className="summary-actions">
           <button className="print-button" onClick={handlePrint}>
             Print / Save as PDF
@@ -68,7 +69,8 @@ function PrioritySummary({ priorities, removePriority }) {
       </div>
 
       <p className="summary-intro">
-        Focus your energy on high-priority items first, then work through medium and low priorities as time allows.
+        Here are your prioritized focus areas with specific next steps.
+        Work through high-priority items first, then medium and low as time allows.
       </p>
 
       <PrioritySection title="High Priority" items={highPriorities} level="high" />

@@ -41,7 +41,7 @@ function App() {
       travelPlans: []
     }
   })
-  const [showReport, setShowReport] = useState(false)
+  const [showFinalReport, setShowFinalReport] = useState(false)
   const [priorities, setPriorities] = useState([])
 
   const updateAnswers = (section, field, value) => {
@@ -71,11 +71,10 @@ function App() {
   }
 
   const setPriorityLevel = (item, level) => {
-    // Remove from any existing level first
     setPriorities(prev => {
       const filtered = prev.filter(p => p.id !== item.id)
       if (level === null) {
-        return filtered // Just remove
+        return filtered
       }
       return [...filtered, { ...item, priorityLevel: level }]
     })
@@ -92,11 +91,14 @@ function App() {
 
   const sections = [
     'Work Basics',
-    'Industry & Advisory Interests',
+    'Industry & Advisory',
     'Health & Lifestyle',
     'Purpose & Passions',
-    'Family, Social & Spiritual'
+    'Family & Social',
+    'Prioritize'
   ]
+
+  const isPrioritizeSection = currentSection === 5
 
   return (
     <div className="app">
@@ -105,7 +107,7 @@ function App() {
         <p className="subtitle">Your personalized guide to a fulfilling next chapter</p>
       </header>
 
-      {!showReport ? (
+      {!showFinalReport ? (
         <>
           <nav className="section-nav">
             {sections.map((section, index) => (
@@ -120,53 +122,66 @@ function App() {
             ))}
           </nav>
 
-          <Survey
-            currentSection={currentSection}
-            answers={answers}
-            updateAnswers={updateAnswers}
-            toggleArrayValue={toggleArrayValue}
-          />
-
-          <div className="survey-navigation">
-            {currentSection > 0 && (
-              <button
-                className="nav-button prev"
-                onClick={() => setCurrentSection(prev => prev - 1)}
-              >
-                Previous
-              </button>
-            )}
-            {currentSection < 4 ? (
-              <button
-                className="nav-button next"
-                onClick={() => setCurrentSection(prev => prev + 1)}
-              >
-                Next
-              </button>
-            ) : (
-              <button
-                className="nav-button generate"
-                onClick={() => setShowReport(true)}
-              >
-                Generate My Report
-              </button>
-            )}
-          </div>
+          {isPrioritizeSection ? (
+            <>
+              <Report
+                answers={answers}
+                priorities={priorities}
+                setPriorityLevel={setPriorityLevel}
+                getPriorityLevel={getPriorityLevel}
+                showActionItems={false}
+              />
+              <div className="survey-navigation">
+                <button
+                  className="nav-button prev"
+                  onClick={() => setCurrentSection(4)}
+                >
+                  Previous
+                </button>
+                <button
+                  className="nav-button generate"
+                  onClick={() => setShowFinalReport(true)}
+                  disabled={priorities.length === 0}
+                >
+                  View My Action Plan
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <Survey
+                currentSection={currentSection}
+                answers={answers}
+                updateAnswers={updateAnswers}
+                toggleArrayValue={toggleArrayValue}
+              />
+              <div className="survey-navigation">
+                {currentSection > 0 && (
+                  <button
+                    className="nav-button prev"
+                    onClick={() => setCurrentSection(prev => prev - 1)}
+                  >
+                    Previous
+                  </button>
+                )}
+                <button
+                  className="nav-button next"
+                  onClick={() => setCurrentSection(prev => prev + 1)}
+                >
+                  Next
+                </button>
+              </div>
+            </>
+          )}
         </>
       ) : (
         <>
           <button
             className="back-button"
-            onClick={() => setShowReport(false)}
+            onClick={() => setShowFinalReport(false)}
           >
-            Back to Survey
+            Back to Prioritize
           </button>
-          <Report
-            answers={answers}
-            priorities={priorities}
-            setPriorityLevel={setPriorityLevel}
-            getPriorityLevel={getPriorityLevel}
-          />
           <PrioritySummary
             priorities={priorities}
             removePriority={removePriority}

@@ -1,4 +1,4 @@
-function Report({ answers, priorities, setPriorityLevel, getPriorityLevel }) {
+function Report({ answers, priorities, setPriorityLevel, getPriorityLevel, showActionItems = true }) {
   const { workBasics, industryInterests, healthLifestyle, purposePassions, socialSpiritual } = answers
 
   const PrioritySelector = ({ item }) => {
@@ -39,16 +39,6 @@ function Report({ answers, priorities, setPriorityLevel, getPriorityLevel }) {
         <div className="narrative-content">
           <h4>{title}</h4>
           <div className="narrative-text">{children}</div>
-          {actionItems.length > 0 && (
-            <div className="narrative-actions">
-              <strong>Next Steps:</strong>
-              <ul>
-                {actionItems.map((action, idx) => (
-                  <li key={idx}>{action}</li>
-                ))}
-              </ul>
-            </div>
-          )}
         </div>
         <PrioritySelector item={item} />
       </div>
@@ -88,10 +78,10 @@ function Report({ answers, priorities, setPriorityLevel, getPriorityLevel }) {
 
   return (
     <div className="report narrative-report">
-      <h2>Your Career Transition Brief</h2>
+      <h2>Step 6: Prioritize Your Focus Areas</h2>
       <p className="report-intro">
-        Based on your responses, here is your personalized transition plan.
-        Assign a priority level (High, Medium, or Low) to each section to build your focused action list.
+        Review each section below and assign a priority level (High, Medium, or Low).
+        This will create your focused action plan with specific next steps.
       </p>
 
       {!hasAnyContent && (
