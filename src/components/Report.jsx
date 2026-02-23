@@ -90,47 +90,10 @@ function Report({ answers, priorities, setPriorityLevel, getPriorityLevel, showA
         </div>
       )}
 
-      {/* EXECUTIVE SUMMARY - Work Basics & Energy (no priority selectors) */}
-      {(hasWorkContent || healthLifestyle.energyPreference) && (
-        <div className="executive-summary">
-          <h3>Your Transition Profile</h3>
-          <div className="summary-narrative">
-            {workBasics.hoursPerWeek && (
-              <p>
-                You're targeting <strong>{getHoursDescription()}</strong>.
-                {workBasics.hoursPerWeek === '0 (fully retired)' && (
-                  <> This is a significant transition that benefits from intentional planning. Your identity has been shaped by decades of practice, and stepping away entirely requires building new sources of purpose, structure, and social connection. Many physicians find that a gradual transition works better than an abrupt stop.</>
-                )}
-                {workBasics.hoursPerWeek === '1-10' && (
-                  <> This "portfolio" approach lets you stay connected to medicine while prioritizing other life areas. The key is finding flexible arrangements that don't create ongoing obligations you'll resent. Per-diem work, occasional consulting, and project-based engagements work well at this level.</>
-                )}
-                {(workBasics.hoursPerWeek === '11-20' || workBasics.hoursPerWeek === '21-30') && (
-                  <> This level of engagement keeps you clinically active and professionally connected while leaving substantial time for other priorities. Many physicians find this the "sweet spot" - enough work to maintain identity and income, but freedom to pursue other interests.</>
-                )}
-                {workBasics.hoursPerWeek === '30+' && (
-                  <> You're looking to remain substantially engaged in professional work. This might mean a traditional part-time position, or combining several part-time roles. The key is ensuring this level of commitment aligns with your other life goals.</>
-                )}
-              </p>
-            )}
-
-            {workBasics.motivation?.includes('Maintaining identity/purpose') && (
-              <p>
-                You've recognized something important: your identity has been closely tied to being a physician. This is true for most doctors after decades of training and practice. The transition isn't about abandoning that identity - it's about expanding it. You'll always be a physician, but you're also a spouse, parent, grandparent, mentor, hobbyist, and community member. This transition is an opportunity to develop those other facets while honoring what medicine has meant to you.
-              </p>
-            )}
-
-            {workBasics.motivation?.includes('Social interaction') && (
-              <p>
-                You value the social interaction that work provides - the colleagues, the team dynamics, the daily human contact. In retirement, this doesn't happen automatically. The water cooler conversations, the lunch meetings, the professional camaraderie - all of it requires intentional replacement. Building social structure into your week is essential, whether through work activities, clubs, volunteer commitments, or regular gatherings with friends.
-              </p>
-            )}
-
-            {healthLifestyle.energyPreference && (
-              <p>
-                You've identified <strong>{healthLifestyle.energyPreference.toLowerCase()}</strong> as your peak energy time. Design your retirement schedule to put important activities during this window. If you pursue professional work, look for opportunities that align with your natural rhythm. Protect your peak time from routine tasks and administrative work. This is one of retirement's great luxuries: you can finally structure your day around your own energy rather than institutional schedules.
-              </p>
-            )}
-          </div>
+      {/* Instructions Banner */}
+      {hasAnyContent && (
+        <div className="prioritize-instructions">
+          <p>Review each area below and click <strong>High</strong>, <strong>Medium</strong>, or <strong>Low</strong> to set your priority level. When finished, click "View My Action Plan" to see your personalized next steps.</p>
         </div>
       )}
 

@@ -1,7 +1,24 @@
-function PrioritySummary({ priorities, removePriority }) {
+function PrioritySummary({ priorities, removePriority, answers }) {
+  const { workBasics, healthLifestyle } = answers
+
   const handlePrint = () => {
     window.print()
   }
+
+  const getHoursDescription = () => {
+    if (!workBasics.hoursPerWeek) return null
+    const hours = workBasics.hoursPerWeek
+    if (hours === '0 (fully retired)') return 'full retirement from paid work'
+    if (hours === '1-10') return 'minimal engagement (1-10 hours weekly)'
+    if (hours === '11-20') return 'part-time involvement (11-20 hours weekly)'
+    if (hours === '21-30') return 'substantial part-time work (21-30 hours weekly)'
+    return 'near full-time engagement (30+ hours weekly)'
+  }
+
+  const hasTransitionProfile = workBasics.hoursPerWeek ||
+    workBasics.motivation?.includes('Maintaining identity/purpose') ||
+    workBasics.motivation?.includes('Social interaction') ||
+    healthLifestyle.energyPreference
 
   const highPriorities = priorities.filter(p => p.priorityLevel === 'high')
   const mediumPriorities = priorities.filter(p => p.priorityLevel === 'medium')
@@ -67,6 +84,50 @@ function PrioritySummary({ priorities, removePriority }) {
           </button>
         </div>
       </div>
+
+      {/* Transition Profile */}
+      {hasTransitionProfile && (
+        <div className="transition-profile">
+          <h4>Your Transition Profile</h4>
+          <div className="profile-narrative">
+            {workBasics.hoursPerWeek && (
+              <p>
+                You're targeting <strong>{getHoursDescription()}</strong>.
+                {workBasics.hoursPerWeek === '0 (fully retired)' && (
+                  <> This is a significant transition that benefits from intentional planning. Your identity has been shaped by decades of practice, and stepping away entirely requires building new sources of purpose, structure, and social connection.</>
+                )}
+                {workBasics.hoursPerWeek === '1-10' && (
+                  <> This "portfolio" approach lets you stay connected to medicine while prioritizing other life areas. The key is finding flexible arrangements that don't create ongoing obligations you'll resent.</>
+                )}
+                {(workBasics.hoursPerWeek === '11-20' || workBasics.hoursPerWeek === '21-30') && (
+                  <> This level of engagement keeps you clinically active and professionally connected while leaving substantial time for other priorities.</>
+                )}
+                {workBasics.hoursPerWeek === '30+' && (
+                  <> You're looking to remain substantially engaged in professional work. The key is ensuring this level of commitment aligns with your other life goals.</>
+                )}
+              </p>
+            )}
+
+            {workBasics.motivation?.includes('Maintaining identity/purpose') && (
+              <p>
+                Your identity has been closely tied to being a physician. This transition is an opportunity to expand that identity while honoring what medicine has meant to you.
+              </p>
+            )}
+
+            {workBasics.motivation?.includes('Social interaction') && (
+              <p>
+                You value the social interaction that work provides. Building social structure into your week will be essential through activities, clubs, or volunteer commitments.
+              </p>
+            )}
+
+            {healthLifestyle.energyPreference && (
+              <p>
+                Your peak energy time is <strong>{healthLifestyle.energyPreference.toLowerCase()}</strong>. Design your schedule to put important activities during this window.
+              </p>
+            )}
+          </div>
+        </div>
+      )}
 
       <p className="summary-intro">
         Here are your prioritized focus areas with specific next steps.

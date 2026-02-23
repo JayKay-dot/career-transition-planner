@@ -670,6 +670,61 @@ body {
 }
 
 /* Executive Summary (Work Basics + Energy) */
+/* Instructions Banner */
+.prioritize-instructions {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 2px solid #f59e0b;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.prioritize-instructions p {
+  color: #92400e;
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.prioritize-instructions strong {
+  color: #78350f;
+}
+
+/* Transition Profile (in final report) */
+.transition-profile {
+  background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
+  border: 2px solid #4299e1;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.transition-profile h4 {
+  color: #1a365d;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #4299e1;
+}
+
+.profile-narrative {
+  color: #2d3748;
+}
+
+.profile-narrative p {
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.profile-narrative p:last-child {
+  margin-bottom: 0;
+}
+
+.profile-narrative strong {
+  color: #1a365d;
+}
+
+/* Legacy executive-summary - keeping for backwards compatibility */
 .executive-summary {
   background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
   border: 2px solid #4299e1;
@@ -795,9 +850,9 @@ body {
 }
 
 .priority-label {
-  font-weight: 600;
-  color: #4a5568;
-  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a365d;
+  font-size: 0.95rem;
 }
 
 .priority-buttons {

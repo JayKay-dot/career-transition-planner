@@ -185,6 +185,7 @@ function App() {
           <PrioritySummary
             priorities={priorities}
             removePriority={removePriority}
+            answers={answers}
           />
         </>
       )}
