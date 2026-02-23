@@ -55,6 +55,17 @@ function Report({ answers, priorities, setPriorityLevel, getPriorityLevel }) {
     )
   }
 
+  // Summary section without priority selector (for Work Basics)
+  const SummarySection = ({ children }) => {
+    return (
+      <div className="summary-section">
+        <div className="summary-content">
+          {children}
+        </div>
+      </div>
+    )
+  }
+
   // Helper to get hours description
   const getHoursDescription = () => {
     if (!workBasics.hoursPerWeek) return null
@@ -69,7 +80,7 @@ function Report({ answers, priorities, setPriorityLevel, getPriorityLevel }) {
   // Check what content we have to show
   const hasWorkContent = workBasics.hoursPerWeek || workBasics.motivation?.length > 0
   const hasIndustryContent = Object.values(industryInterests).some(v => v)
-  const hasHealthContent = healthLifestyle.fitnessGoals?.length > 0 || healthLifestyle.activities?.length > 0
+  const hasHealthContent = healthLifestyle.fitnessGoals?.length > 0 || healthLifestyle.activities?.length > 0 || healthLifestyle.techComfort
   const hasPurposeContent = purposePassions.volunteering?.length > 0 || purposePassions.hobbies?.length > 0 || purposePassions.somedayDreams
   const hasSocialContent = socialSpiritual.familyTime || socialSpiritual.travelPlans?.length > 0 || socialSpiritual.spiritualConnection
 
@@ -89,23 +100,12 @@ function Report({ answers, priorities, setPriorityLevel, getPriorityLevel }) {
         </div>
       )}
 
-      {/* WORK & PROFESSIONAL IDENTITY */}
-      {hasWorkContent && (
-        <div className="narrative-category">
-          <h3>Work & Professional Identity</h3>
-
-          {workBasics.hoursPerWeek && (
-            <NarrativeSection
-              id="work-structure"
-              title="Your Ideal Work Structure"
-              actionItems={
-                workBasics.hoursPerWeek === '0 (fully retired)'
-                  ? ['Create a weekly rhythm that replaces work structure', 'Plan how you\'ll answer "what do you do?" questions', 'Consider a gradual transition rather than abrupt stop']
-                  : workBasics.hoursPerWeek === '1-10'
-                  ? ['Look for per-diem or as-needed arrangements', 'Set clear boundaries around availability', 'Consider quarterly commitments vs. ongoing obligations']
-                  : ['Identify roles matching your target hours', 'Consider multiple part-time roles vs. one position', 'Build in flexibility for travel and family']
-              }
-            >
+      {/* EXECUTIVE SUMMARY - Work Basics & Energy (no priority selectors) */}
+      {(hasWorkContent || healthLifestyle.energyPreference) && (
+        <div className="executive-summary">
+          <h3>Your Transition Profile</h3>
+          <div className="summary-narrative">
+            {workBasics.hoursPerWeek && (
               <p>
                 You're targeting <strong>{getHoursDescription()}</strong>.
                 {workBasics.hoursPerWeek === '0 (fully retired)' && (
@@ -121,42 +121,26 @@ function Report({ answers, priorities, setPriorityLevel, getPriorityLevel }) {
                   <> You're looking to remain substantially engaged in professional work. This might mean a traditional part-time position, or combining several part-time roles. The key is ensuring this level of commitment aligns with your other life goals.</>
                 )}
               </p>
-            </NarrativeSection>
-          )}
+            )}
 
-          {workBasics.motivation?.includes('Maintaining identity/purpose') && (
-            <NarrativeSection
-              id="identity"
-              title="Identity Beyond the White Coat"
-              actionItems={[
-                'Reflect on the values that drew you to medicine - they remain yours',
-                'Develop new ways to introduce yourself beyond "I\'m a doctor"',
-                'Stay connected to medicine in new capacities (mentoring, writing, volunteering)',
-                'Consider working with a transition coach'
-              ]}
-            >
+            {workBasics.motivation?.includes('Maintaining identity/purpose') && (
               <p>
                 You've recognized something important: your identity has been closely tied to being a physician. This is true for most doctors after decades of training and practice. The transition isn't about abandoning that identity - it's about expanding it. You'll always be a physician, but you're also a spouse, parent, grandparent, mentor, hobbyist, and community member. This transition is an opportunity to develop those other facets while honoring what medicine has meant to you.
               </p>
-            </NarrativeSection>
-          )}
+            )}
 
-          {workBasics.motivation?.includes('Social interaction') && (
-            <NarrativeSection
-              id="social-work"
-              title="Maintaining Social Connection"
-              actionItems={[
-                'Schedule regular social activities each week',
-                'Join clubs, groups, or leagues that meet consistently',
-                'Consider coworking spaces if you do consulting work',
-                'Maintain professional connections through medical societies'
-              ]}
-            >
+            {workBasics.motivation?.includes('Social interaction') && (
               <p>
                 You value the social interaction that work provides - the colleagues, the team dynamics, the daily human contact. In retirement, this doesn't happen automatically. The water cooler conversations, the lunch meetings, the professional camaraderie - all of it requires intentional replacement. Building social structure into your week is essential, whether through work activities, clubs, volunteer commitments, or regular gatherings with friends.
               </p>
-            </NarrativeSection>
-          )}
+            )}
+
+            {healthLifestyle.energyPreference && (
+              <p>
+                You've identified <strong>{healthLifestyle.energyPreference.toLowerCase()}</strong> as your peak energy time. Design your retirement schedule to put important activities during this window. If you pursue professional work, look for opportunities that align with your natural rhythm. Protect your peak time from routine tasks and administrative work. This is one of retirement's great luxuries: you can finally structure your day around your own energy rather than institutional schedules.
+              </p>
+            )}
+          </div>
         </div>
       )}
 
@@ -379,24 +363,6 @@ function Report({ answers, priorities, setPriorityLevel, getPriorityLevel }) {
             </NarrativeSection>
           )}
 
-          {healthLifestyle.energyPreference && (
-            <NarrativeSection
-              id="energy"
-              title="Energy-Optimized Schedule"
-              actionItems={[
-                'Schedule demanding activities during your peak energy window',
-                'Protect peak hours from routine tasks and interruptions',
-                'Align work commitments with your natural rhythm',
-                'Plan social activities when your energy matches the occasion'
-              ]}
-            >
-              <p>
-                You've identified <strong>{healthLifestyle.energyPreference.toLowerCase()}</strong> as your peak energy time. This self-knowledge is valuable - design your retirement schedule to put important activities during this window.
-                If you pursue professional work, look for opportunities that align with your natural rhythm. Protect your peak time from routine tasks and administrative work.
-                This is one of retirement's great luxuries: you can finally structure your day around your own energy rather than institutional schedules.
-              </p>
-            </NarrativeSection>
-          )}
         </div>
       )}
 

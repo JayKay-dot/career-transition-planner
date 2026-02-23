@@ -664,6 +664,39 @@ body {
   line-height: 1.7;
 }
 
+/* Executive Summary (Work Basics + Energy) */
+.executive-summary {
+  background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
+  border: 2px solid #4299e1;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.executive-summary h3 {
+  color: #1a365d;
+  font-size: 1.4rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #4299e1;
+}
+
+.summary-narrative {
+  color: #2d3748;
+}
+
+.summary-narrative p {
+  margin-bottom: 1rem;
+}
+
+.summary-narrative p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-narrative strong {
+  color: #1a365d;
+}
+
 .narrative-category {
   margin-bottom: 2.5rem;
 }
